@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { SafeAreaView, StatusBar, useColorScheme, View } from 'react-native';
+import { ActivityIndicator, SafeAreaView, StatusBar, Text, useColorScheme, View } from 'react-native';
 import CurrentForecast from './Components/CurrentForecast';
 import NavBar from './Components/NavBar';
 import SevenDayForecast from './Containers/SevenDayForecast';
@@ -73,7 +73,7 @@ const App = () => {
 					"lat": lat,
 					"lon": long,
 					"exclude": "minutely,hourly,alerts",
-					"appid": "c683404852bbb811b7477d473f10e89d",
+					"appid": "dccb9809d4ba18c5fe8991df7efd6446",
 					"units": "metric",
 				},
 			},
@@ -122,11 +122,21 @@ const App = () => {
 		<NavigationContainer>
 			<SafeAreaView style={{ flex: 1 }}>
 				<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-				<View style={{ flex: 1, display: 'flex', justifyContent: 'space-between', backgroundColor: 'floralwhite' }}>
-					<SearchBar latitude={setLat} longitude={setLong} />
-					<CurrentForecast forecast={currentWeather} />
-					<SevenDayForecast forecast={sevenDays} />
-					{/* <NavBar /> */}
+				<View style={{ flex: 1, display: 'flex', justifyContent: 'center', backgroundColor: 'floralwhite' }}>
+					{
+
+						currentWeather.temperature != 0 ? (
+							<View style={{ flex: 1 }}>
+								<SearchBar latitude={setLat} longitude={setLong} />
+								<CurrentForecast forecast={currentWeather} />
+								<SevenDayForecast forecast={sevenDays} />
+								{/* <NavBar /> */}
+							</View>
+						) : <View style={{ flex: 1 }}>
+							<Text>Unfortunately we are having trouble loading the data... Please try again later</Text>
+							<ActivityIndicator size={'small'} color={'darkred'} />
+						</View>
+					}
 				</View>
 			</SafeAreaView>
 		</NavigationContainer>
