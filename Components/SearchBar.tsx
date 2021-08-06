@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TextInput } from 'react-native';
 
 export type Props = {
     latitude?: Dispatch<SetStateAction<number>>,
@@ -64,10 +64,7 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingStart: 20,
         backgroundColor: 'white',
-        // justifyContent: 'flex-end',
-        // alignItems: 'center',
         maxHeight: '7%',
-        // borderWidth: 0.5,
         elevation: 3,
         borderRadius: 45,
         margin: 10

@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { Dispatch, SetStateAction } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 export type Props = {
-
+    latitude?: Dispatch<SetStateAction<number>>,
+    longitude?: Dispatch<SetStateAction<number>>,
 };
 
 const NavBar: React.FC<Props> = ({
-
+latitude,
+longitude
 }) => {
     return (
         <View style={styles.bar}>
-            <TouchableOpacity style={styles.circle} onPress={() => console.info('search pressed!')}>
+            <TouchableOpacity style={styles.circle} onPress={() => {
+                if (latitude != undefined) {
+                    latitude(Math.random()*89);
+                } else if (longitude != undefined) {
+                    longitude(Math.random()*179);
+                }
+            }}>
 
             </TouchableOpacity>
         </View>
@@ -20,10 +28,10 @@ const NavBar: React.FC<Props> = ({
 const styles = StyleSheet.create({
     bar: {
         flex: 1, 
-        backgroundColor: 'darkorange', 
+        backgroundColor: 'indigo', 
         justifyContent: 'flex-end',
         alignItems: 'center',
-        maxHeight: '5%'
+        maxHeight: '5%',
     },
     circle: {
         height: 60,

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import axios from 'axios';
 import WeatherCover from './WeatherCover';
 import { Weather } from '../App';
 
@@ -17,7 +16,7 @@ const CurrentForecast: React.FC<Props> = ({
         <View style={styles.card}>
             {
                 forecast.temperature != 0 ? (
-                    <WeatherCover forecast={forecast}>
+                    <WeatherCover icon={forecast.image} label={forecast.weather} value={Math.round(forecast.temperature)}>
                         <Text></Text>
                         <Text style={styles.real_feel}>Feeling like {Math.round(forecast.real_feel)}°C</Text>
                     </WeatherCover>
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
         borderTopStartRadius: 45,
         borderBottomStartRadius: 45,
         overflow: 'hidden',
-        width: '90%',
+        width: '60%',
         alignSelf: 'flex-end'
     },
     real_feel: {

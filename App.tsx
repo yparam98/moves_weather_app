@@ -24,7 +24,6 @@ export type Weather = {
 	humidity: number,
 };
 
-
 const App = () => {
 
 	const [currentWeather, setCurrentWeather] = useState<Weather>({
@@ -85,8 +84,7 @@ const App = () => {
 				temperature: response.data.current.temp,
 				real_feel: response.data.current.feels_like,
 				weather: response.data.current.weather[0].main,
-				image: (response.data.current.weather[0].main == "Clear" ? ((moment.unix(response.data.current.dt).hour() > 7 && moment.unix(response.data.current.dt).hour() < 21) ? 9 : 10) :
-					parseInt(response.data.current.weather[0].id.toString().charAt(0))),
+				image: (response.data.current.weather[0].main == "Clear" ? ((moment.unix(response.data.current.dt).hour() > 5 && moment.unix(response.data.current.dt).hour() < 21) ? 9 : 10) : parseInt(response.data.current.weather[0].id.toString().charAt(0))),
 				sunrise: response.data.current.sunrise,
 				sunset: response.data.current.sunset,
 			}));
@@ -124,11 +122,11 @@ const App = () => {
 		<NavigationContainer>
 			<SafeAreaView style={{ flex: 1 }}>
 				<StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-				<View style={{ flex: 1, display: 'flex', justifyContent: 'space-between' }}>
+				<View style={{ flex: 1, display: 'flex', justifyContent: 'space-between', backgroundColor: 'floralwhite' }}>
 					<SearchBar latitude={setLat} longitude={setLong} />
 					<CurrentForecast forecast={currentWeather} />
 					<SevenDayForecast forecast={sevenDays} />
-					<NavBar />
+					{/* <NavBar /> */}
 				</View>
 			</SafeAreaView>
 		</NavigationContainer>

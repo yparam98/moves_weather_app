@@ -1,9 +1,9 @@
-import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import moment from 'moment';
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Weather } from '../App';
+import Details from './Details';
 import WeatherCover from './WeatherCover';
-// import { Weather } from './CurrentForecast';
 
 
 
@@ -14,14 +14,23 @@ export type Props = {
 const FutureForecastPanel: React.FC<Props> = ({
     forecast
 }) => {
+
+    const [modalShow, setModalShow] = useState(false);
+
     return (
-        <TouchableOpacity style={styles.card}>
-            {/* <Text>{forecast.real_feel}</Text> */}
-            <WeatherCover forecast={forecast}>
-                <Text></Text>
-                <Text style={styles.real_feel}>{moment.unix(forecast.date).format('dddd, LL')}</Text>
-            </WeatherCover>
-        </TouchableOpacity>
+        <View style={{ flex: 1 }}>
+            <Modal animationType={'slide'} visible={modalShow} onRequestClose={() => { setModalShow(false) }} presentationStyle={'pageSheet'}>
+                <WeatherCover icon={forecast.image} label={forecast.weather} value={Math.round(forecast.temperature)}>
+                    <Details forecast={forecast} />
+                </WeatherCover>
+            </Modal>
+            <TouchableOpacity style={styles.card} onPress={() => { setModalShow(true) }}>
+            <WeatherCover icon={forecast.image} label={forecast.weather} value={Math.round(forecast.temperature)}>
+                    <Text></Text>
+                    <Text style={styles.real_feel}>{moment.unix(forecast.date).format('dddd, LL')}</Text>
+                </WeatherCover>
+            </TouchableOpacity>
+        </View>
     );
 };
 

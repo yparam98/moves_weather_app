@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Weather } from '../App';
 import FutureForecastPanel from '../Components/FutureForecastPanel';

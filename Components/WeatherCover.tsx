@@ -1,43 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Weather } from '../App';
-
-
+import React from 'react';
+import { Image, ImageBackground, ScrollView, StyleSheet, View } from 'react-native';
+import IconView from './IconView';
 
 export type Props = {
-    forecast: Weather
+    icon: number,
+    label: string,
+    value: number|string
 };
 
+export const images = [
+    null, // 0
+    null, // 1
+    require("../assets/icons/2.png"), // 2
+    require("../assets/icons/3.png"), // 3
+    null, // 4
+    require("../assets/icons/5.png"), // 5
+    require("../assets/icons/6.png"), // 6
+    null, // 7
+    require("../assets/icons/8.png"), // 8
+    require("../assets/icons/clear.png"), // 9
+    require("../assets/icons/night.png"), // 10
+    require("../assets/icons/max.png"), // 11
+    require("../assets/icons/min.png"), // 12
+    require("../assets/icons/sunrise.png"), // 13
+    require("../assets/icons/sunset.png"), // 14
+    require("../assets/icons/windy.png"), // 15
+];
+
 const WeatherCover: React.FC<Props> = ({
-    forecast,
+    icon,
+    label,
+    value,
     children
 }) => {
-    const images = [
-        null,
-        null,
-        require("../assets/icons/2.png"),
-        require("../assets/icons/3.png"),
-        null,
-        require("../assets/icons/5.png"),
-        require("../assets/icons/6.png"),
-        null,
-        require("../assets/icons/8.png"),
-        require("../assets/icons/clear.png"),
-        require("../assets/icons/night.png"),
-    ];
-
-
     return (
         <View style={styles.card}>
             <ImageBackground
                 style={styles.background}
-                source={images[forecast.image]}
+                source={images[icon]}
                 blurRadius={30}
             >
                 <View style={styles.darken}>
-                    <Image style={styles.icon} source={images[forecast.image]} resizeMode={'contain'} />
-                    <Text style={styles.weather}>{forecast.weather}</Text>
-                    <Text style={styles.temperature}>{Math.round(forecast.temperature)}°C</Text>
+                    <IconView icon={icon} label={label} value={value} />
                     {children}
                 </View>
             </ImageBackground>
@@ -50,8 +54,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        // borderStyle: 'solid',
-        // borderBottomStartRadius: 45,
     },
     background: {
         flex: 1,
@@ -63,14 +65,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     darken: {
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundColor: 'rgba(0,0,0,0.3)',
         height: '100%',
-        width: '100%',
         alignItems: 'center',
-        justifyContent: 'center',
-    },
-    icon: {
-        height: '40%',
+        padding: 10,
     },
     weather: {
         color: 'white',
