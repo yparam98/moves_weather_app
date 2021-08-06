@@ -20,12 +20,12 @@ const FutureForecastPanel: React.FC<Props> = ({
     return (
         <View style={{ flex: 1 }}>
             <Modal animationType={'slide'} visible={modalShow} onRequestClose={() => { setModalShow(false) }} presentationStyle={'pageSheet'}>
-                <WeatherCover icon={forecast.image} label={forecast.weather} value={Math.round(forecast.temperature)}>
+                <WeatherCover icon={forecast.image} label={forecast.weather} value={Math.round(forecast.temperature)+"°C"}>
                     <Details forecast={forecast} />
                 </WeatherCover>
             </Modal>
             <TouchableOpacity style={styles.card} onPress={() => { setModalShow(true) }}>
-            <WeatherCover icon={forecast.image} label={forecast.weather} value={Math.round(forecast.temperature)}>
+            <WeatherCover icon={forecast.image} label={forecast.weather} value={Math.round(forecast.temperature)+"°C"}>
                     <Text></Text>
                     <Text style={styles.real_feel}>{moment.unix(forecast.date).format('dddd, LL')}</Text>
                 </WeatherCover>

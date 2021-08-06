@@ -15,8 +15,8 @@ const Details: React.FC<Props> = ({
         <View style={styles.metadataContainer}>
             <Text style={styles.real_feel}>{moment.unix(forecast.date).format('dddd, LL')}</Text>
             <View style={styles.metadataCard}>
-                <IconView icon={11} label={'Min'} value={Math.round(forecast.min)} />
-                <IconView icon={12} label={'Max'} value={Math.round(forecast.min)} />
+                <IconView icon={11} label={'Min'} value={Math.round(forecast.min)+"°C"} />
+                <IconView icon={12} label={'Max'} value={Math.round(forecast.max)+"°C"} />
             </View>
             <View style={styles.metadataCard}>
                 <IconView icon={13} label={'Sunrise'} value={moment.unix(forecast.sunrise).format('h:ma')} />

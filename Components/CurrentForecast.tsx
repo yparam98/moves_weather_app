@@ -16,7 +16,7 @@ const CurrentForecast: React.FC<Props> = ({
         <View style={styles.card}>
             {
                 forecast.temperature != 0 ? (
-                    <WeatherCover icon={forecast.image} label={forecast.weather} value={Math.round(forecast.temperature)}>
+                    <WeatherCover icon={forecast.image} label={forecast.weather} value={Math.round(forecast.temperature)+"°C"}>
                         <Text></Text>
                         <Text style={styles.real_feel}>Feeling like {Math.round(forecast.real_feel)}°C</Text>
                     </WeatherCover>
