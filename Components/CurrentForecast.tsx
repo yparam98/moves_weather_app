@@ -1,45 +1,46 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import axios from 'axios';
+import WeatherCover from './WeatherCover';
+import { Weather } from '../App';
 
 export type Props = {
-    
+    forecast: Weather
 };
 
+
+
 const CurrentForecast: React.FC<Props> = ({
-
+    forecast
 }) => {
-    interface Skill {
-        name: string;
-    };
-
-    const [skills, setSkills] = useState<Skill[]>([{name: ''}]);
-
-    useEffect(() => {
-        console.info("useEffect entered");
-        
-        axios.get(
-            'https://yathavanparamesh.ca/api/expertise/getNeededSkills'
-        ).then((response) => {
-            setSkills(response.data);
-            console.log(skills[1].name);
-        }).catch((err) => {
-            console.error("[Axios] " + err.message);
-        });
-    }, []);
-
-
     return (
-        <View>
+        <View style={styles.card}>
             {
-                skills != [] ? (
-                    skills.map((line) => {
-                        return <Text>{line.name}</Text>
-                    })
-                ) : <Text>Waiting...</Text>
+                forecast.temperature != 0 ? (
+                    <WeatherCover forecast={forecast}>
+                        <Text></Text>
+                        <Text style={styles.real_feel}>Feeling like {Math.round(forecast.real_feel)}°C</Text>
+                    </WeatherCover>
+                ) : <ActivityIndicator size='large' color='teal' />
             }
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    card: {
+        flex: 1,
+        borderTopStartRadius: 45,
+        borderBottomStartRadius: 45,
+        overflow: 'hidden',
+        width: '90%',
+        alignSelf: 'flex-end'
+    },
+    real_feel: {
+        color: 'white',
+        fontSize: 12,
+        fontStyle: 'italic'
+    }
+});
 
 export default CurrentForecast;
